@@ -50,12 +50,12 @@ fn today() {
         let wake_minutes = 0;
         let wake_seconds = 0;
 
-        let wake_available_hour = hour - wake_hour;
+        let wake_available_hour = hour.saturating_sub(wake_hour);
         let wake_available_min = wake_hour * 60 + wake_minutes;
         let wake_available_sec = wake_hour * 3600 + wake_minutes * 60 + wake_seconds;
         
-        let elapsed_available_min = elapsed_minutes - wake_available_min;
-        let elapsed_available_sec = elapsed_seconds - wake_available_sec;
+        let elapsed_available_min = elapsed_minutes.saturating_sub(wake_available_min);
+        let elapsed_available_sec = elapsed_seconds.saturating_sub(wake_available_sec);
 
         
         print!("\x1B[2J\x1B[H");
