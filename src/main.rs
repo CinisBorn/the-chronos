@@ -18,6 +18,7 @@ fn today() {
         print!("\x1B[2J\x1B[H");
         std::io::stdout().flush().unwrap();
 
+        println!(" \x1B[33mGeneral Information:\x1B[0m\n");
         println!(" Current Date: {today}");
         println!(" Current Time: {hour}:{minutes}:{seconds}\n");
         
