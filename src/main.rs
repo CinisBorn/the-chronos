@@ -1,5 +1,7 @@
 use std::time::Duration;
 use std::io::Write;
+use time::OffsetDateTime;
+use time::util::{days_in_year, days_in_month, weeks_in_year};
 
 fn main() {
     today();
@@ -7,8 +9,6 @@ fn main() {
 
 fn today() {
     loop {
-        use time::OffsetDateTime;
-        
         let now = OffsetDateTime::now_local().unwrap();
         let hour = now.hour() as u64;
         let minutes = now.minute() as u64;
@@ -20,7 +20,12 @@ fn today() {
 
         println!(" \x1B[33mGeneral Information:\x1B[0m\n");
         println!(" Current Date: {today}");
-        println!(" Current Time: {hour}:{minutes}:{seconds}\n");
+        println!(" Current Time: {hour}:{minutes}:{seconds}");
+        println!(" Current Day of Year: {}\n", today.ordinal());
+        
+        println!(" Number of Days in This Year: {}", days_in_year(now.year()));
+        println!(" Number of Days in This Month: {}", days_in_month(now.month(), now.year()));
+        println!(" Number of Weeks in This Year: {}\n", weeks_in_year(now.year()));
         
         let elapsed_minutes = calculate_elapsed_time(hour, minutes, seconds).0;
         let elapsed_seconds = calculate_elapsed_time(hour, minutes, seconds).1;
