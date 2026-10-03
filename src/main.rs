@@ -18,8 +18,8 @@ fn today() {
         print!("\x1B[2J\x1B[H");
         std::io::stdout().flush().unwrap();
 
-        println!("Current Date: {today}");
-        println!("Current Time: {hour}:{minutes}:{seconds}\n");
+        println!(" Current Date: {today}");
+        println!(" Current Time: {hour}:{minutes}:{seconds}\n");
         
         let elapsed_minutes = calculate_elapsed_time(hour, minutes, seconds).0;
         let elapsed_seconds = calculate_elapsed_time(hour, minutes, seconds).1;
@@ -53,9 +53,10 @@ fn available_time(hour: u64, minutes: u64, seconds: u64) {
     let elapsed_available_min = minutes.saturating_sub(wake_available_min);
     let elapsed_available_sec = seconds.saturating_sub(wake_available_sec);
 
-    println!("Available Hours counting sleep time: {wake_available_hour}/{available_hours}");
-    println!("Available Minutes counting sleep time: {elapsed_available_min}/{available_minutes}");
-    println!("Available Seconds counting sleep time: {elapsed_available_sec}/{available_seconds}");
+    println!(" \x1B[33mAvailable Time Counting Sleep Time:\x1B[0m\n");
+    println!(" Hours: {wake_available_hour}/{available_hours}");
+    println!(" Minutes: {elapsed_available_min}/{available_minutes}");
+    println!(" Seconds: {elapsed_available_sec}/{available_seconds}");
 }
 
 fn remaining_time(hour: u64, minutes: u64, seconds: u64) {
@@ -84,9 +85,10 @@ fn remaining_time(hour: u64, minutes: u64, seconds: u64) {
     let elapsed_minutes = calculate_elapsed_time(hour, minutes, seconds).0;
     let elapsed_seconds = calculate_elapsed_time(hour, minutes, seconds).1;
 
-    println!("Hours: {hour}/{total_hours}");
-    println!("Minutes: {elapsed_minutes}/{total_minutes}");
-    println!("Seconds: {elapsed_seconds}/{total_seconds}\n");
+    println!(" \x1B[33mRemaining Time Comparation:\x1B[0m\n");
+    println!(" Hours: {hour}/{total_hours}");
+    println!(" Minutes: {elapsed_minutes}/{total_minutes}");
+    println!(" Seconds: {elapsed_seconds}/{total_seconds}\n");
 }
 
 fn calculate_elapsed_time(hour: u64, minutes: u64, seconds: u64) -> (u64, u64) {
